@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Adopt a Pet</title>
+    </head>
+    <body>
+        <h1>Add a Pet</h1>
+        <a href="/logout">logout</a>
+        <form action="create" method="post">
+            {% csrf_token %}
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name"><br>
+            <label for="kind">Type of Pet: </label>
+            <select name="kind" id="kind">
+                <option value="1">Dog</option>
+                <option value="2">Cat</option>
+                <option value="3">Snake</option>
+                <option value="4">Bird</option>
+                <option value="5">Fish</option>
+                <option value="6">Fox</option>
+                <option value="7">Rat</option>
+                <option value="8">Rabbit</option>
+                <option value="9">Poison Dart Frog</option>
+                <option value="10">Other</option>
+                <input type="submit" value="Adopt">
+            </select>
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </body>
+</html>

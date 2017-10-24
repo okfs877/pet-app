@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Pets!!!</title>
+    </head>
+    <body>
+        <h1>Pet App!</h1>
+        <a href="/logout">logout</a>
+        <h2><a href="new">Add a Pet</a></h2>
+        <p>your pets</p>
+        {% for pet in user.pets.all %}
+            <p><a href="edit/{{pet.id}}">{{pet.name}}</a> the {{pet.kind.name}}  <a href="destroy/{{pet.id}}">Euthanize</a></p>
+        {% endfor %}
+        <h2>Other Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in users %}
+                <tr>
+                    <td><a href="show/{{i.id}}">{{i.first_name}}</a></td>
+                    <td>{{i.pets.all.count}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

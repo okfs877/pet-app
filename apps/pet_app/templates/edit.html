@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Edit {{pet.name}}'s info</title>
+    </head>
+    <body>
+        <a href="/logout">logout</a>
+        <form action="/pets/update" method="post">
+            {% csrf_token %}
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" value="{{pet.name}}"><br>
+            <label for="kind">Type of Pet: </label>
+            <select name="kind" id="kind">
+                {% for kind in kinds %}
+                    {% if pet.kind.id == kind.id%}
+                    <option value="{{kind.id}}" selected="selected">{{kind.name}}</option>
+                    {% else %}
+                    <option value="{{kind.id}}">{{kind.name}}</option>
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" name="pet_id" value="{{pet.id}}">
+                <input type="submit" value="Save!">
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </body>
+</html>
